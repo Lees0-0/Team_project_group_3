@@ -58,9 +58,17 @@ public class GameWindow extends JFrame {
                     textField.setText("");
                     return;
                 }
+
                 String computerResponse = gameLogic.generateComputerResponse(userInput);
 
-
+                if (usedCities.size() >= 2 && checkingFirstLastSymbol(userInput)) {
+                    String lastAddedCity = usedCities.get(usedCities.size() - 1);
+                    char lastLetter = Character.toUpperCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
+                    JOptionPane.showMessageDialog(GameWindow.this,
+                            "Місто повинно починатись з " + lastLetter);
+                    textField.setText("");
+                    return;
+                }
 
                 if (computerResponse.equals("Комп'ютер не знайшов відповідного міста.")) {
                     GameWonWindow gameWonWindow = new GameWonWindow(moveCounter);
@@ -73,12 +81,12 @@ public class GameWindow extends JFrame {
                 } else {
                     textField.setText("");
                     computerResponseLabel.setText("Відповідь комп'ютера: " + computerResponse);
-
-                    usedCities.add(computerResponse.toLowerCase());
                     usedCities.add(userInput.toLowerCase());
+                    usedCities.add(computerResponse.toLowerCase());
                     moveCounter++;
 
                 }
+
 
 
                 
@@ -107,6 +115,15 @@ public class GameWindow extends JFrame {
             if(citys.equalsIgnoreCase(city)){
                 return true;
             }
+        }
+        return false;
+    }
+    public boolean checkingFirstLastSymbol(String userInput){
+        char firstLetter = Character.toLowerCase(userInput.charAt(0));
+        String lastAddedCity = usedCities.get(usedCities.size() - 1);
+        char lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
+        if (firstLetter != lastLetter ){
+            return true;
         }
         return false;
     }
