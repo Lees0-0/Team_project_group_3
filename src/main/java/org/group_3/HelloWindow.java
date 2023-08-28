@@ -1,4 +1,4 @@
-package org.example;
+package org.group_3;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class HelloWindow {
         int screenHeight = screenSize.height;
 
         JFrame frame = new JFrame("Вітаємо!");
-        frame.setSize(width,height);
+        frame.setSize(width, height);
         int x = (screenWidth - width) / 2;
         int y = (screenHeight - height) / 2;
         frame.setLocation(x, y);
@@ -24,19 +24,15 @@ public class HelloWindow {
 
 
         JLabel label = new JLabel("Вітаємо Вас у грі дитинства і всіх розумників!");
-        JButton button = new JButton("Старт!");
         panel.add(label);
+        JButton button = new JButton("Старт!");
         panel.add(button);
-        frame.getContentPane().add(panel);
 
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createHelloWindow();
-            }
+        button.addActionListener(e -> {
+            frame.dispose();
+            GameWindow.createGameWindow();
         });
+        frame.getContentPane().add(panel);
+        frame.setVisible(true);
     }
 }
