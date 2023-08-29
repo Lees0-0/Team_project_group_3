@@ -9,7 +9,7 @@ import java.util.List;
 public class GameLogic {
     private static final String ABSOLUTE_PARTF = "./textfolder/City.txt";
     public int moveCounter = 0;
-    // Створюємо додатковий список для збору відповідей.
+    // Створюємо додатковий список для збору відповідей
     static List<String> usedCities = new ArrayList<>();
     private List<String> citiesList;
 
