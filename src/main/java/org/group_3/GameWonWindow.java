@@ -19,7 +19,7 @@ public class GameWonWindow extends JFrame {
         setLocation(x, y);
 
         JPanel panel = new JPanel(new FlowLayout());
-        JLabel label = new JLabel("ВІТАЮ З ПЕРЕМОГОЮ. Кількість ходів: " + moveCounter );
+        JLabel label = new JLabel("ВІТАЮ З ПЕРЕМОГОЮ. Кількість ходів: " + moveCounter);
         panel.add(label);
         JButton playAgainButton = new JButton("Грати знову");
         panel.add(playAgainButton);

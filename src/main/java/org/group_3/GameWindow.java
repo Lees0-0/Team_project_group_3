@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 public class GameWindow extends JFrame {
-    private int moveCounter = 0;
-    static List<String> usedCities = new ArrayList<>();
+
+
     public GameWindow() throws HeadlessException {
         GameLogic gameLogic = new GameLogic();
         setTitle("Cities");
@@ -45,14 +45,14 @@ public class GameWindow extends JFrame {
                 String userInput = textField.getText().trim();
 
 
-                if (!gameLogic.isValidCity(userInput)) {
+                if (gameLogic.isValidCity(userInput)) {
                     JOptionPane.showMessageDialog(GameWindow.this,
                             "Невірне місто! Спробуйте ще раз.");
                     textField.setText("");
                     return;
                 }
 
-                if (isCityUsed(userInput)) {
+                if (gameLogic.isCityUsed(userInput)) {
                     JOptionPane.showMessageDialog(GameWindow.this,
                             "Це місто вже було використане! Спробуйте інше місто.");
                     textField.setText("");
@@ -61,8 +61,8 @@ public class GameWindow extends JFrame {
 
                 String computerResponse = gameLogic.generateComputerResponse(userInput);
 
-                if (usedCities.size() >= 2 && checkingFirstLastSymbol(userInput)) {
-                    String lastAddedCity = usedCities.get(usedCities.size() - 1);
+                if (gameLogic.usedCities.size() >= 2 && gameLogic.checkingFirstLastSymbol(userInput)) {
+                    String lastAddedCity = gameLogic.usedCities.get(gameLogic.usedCities.size() - 1);
                     char lastLetter = Character.toUpperCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
                     JOptionPane.showMessageDialog(GameWindow.this,
                             "Місто повинно починатись з " + lastLetter);
@@ -70,34 +70,30 @@ public class GameWindow extends JFrame {
                     return;
                 }
 
-                if (computerResponse.equals("Комп'ютер не знайшов відповідного міста.")) {
-                    GameWonWindow gameWonWindow = new GameWonWindow(moveCounter);
+                if (computerResponse.equals("здаюсь")) {
+                    GameWonWindow gameWonWindow = new GameWonWindow(gameLogic.moveCounter);
                     gameWonWindow.setVisible(true);
-                    moveCounter++;
+                    gameLogic.moveCounter++;
                     gameLogic.clearCollections();
-                    resetGame();
                     dispose();
 
                 } else {
                     textField.setText("");
                     computerResponseLabel.setText("Відповідь комп'ютера: " + computerResponse);
-                    usedCities.add(userInput.toLowerCase());
-                    usedCities.add(computerResponse.toLowerCase());
-                    moveCounter++;
+                    gameLogic.usedCities.add(userInput.toLowerCase());
+                    gameLogic.usedCities.add(computerResponse.toLowerCase());
+                    gameLogic.moveCounter++;
 
                 }
 
 
-
-                
             }
         });
         giveUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameLostWindow gameLostWindow = new GameLostWindow(moveCounter);
+                GameLostWindow gameLostWindow = new GameLostWindow(gameLogic.moveCounter);
                 gameLostWindow.setVisible(true);
-                resetGame();
                 gameLogic.clearCollections();
                 dispose();
             }
@@ -109,27 +105,6 @@ public class GameWindow extends JFrame {
         add(panel);
 
 
-    }
-    public static boolean isCityUsed(String city) {
-        for (String citys: usedCities) {
-            if(citys.equalsIgnoreCase(city)){
-                return true;
-            }
-        }
-        return false;
-    }
-    public boolean checkingFirstLastSymbol(String userInput){
-        char firstLetter = Character.toLowerCase(userInput.charAt(0));
-        String lastAddedCity = usedCities.get(usedCities.size() - 1);
-        char lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
-        if (firstLetter != lastLetter ){
-            return true;
-        }
-        return false;
-    }
-    public void resetGame() {
-        moveCounter = 0;
-        usedCities.clear();
     }
 
 

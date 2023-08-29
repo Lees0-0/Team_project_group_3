@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 public class GameLostWindow extends JFrame {
     public GameLostWindow(int moveCounter) throws HeadlessException {
         GameLogic gameLogic = new GameLogic();
