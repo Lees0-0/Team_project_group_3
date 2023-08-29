@@ -1,13 +1,10 @@
 package org.group_3;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 public class GameLogic {
     private static final String ABSOLUTE_PARTF = "./textfolder/City.txt";
