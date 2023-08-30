@@ -1,24 +1,28 @@
 package org.group_3.GameLogic;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class GameLogic {
 
-
-    private static final String ABSOLUTE_PARTF = "./textfolder/City.txt";
 
     // Створюємо додатковий список для збору відповідей.
     static List<String> usedCities = new ArrayList<>();
     private List<String> citiesList;
 
     public GameLogic() {
-        citiesList = cities();
+        citiesList = downloadCityList();
     }
 
 
@@ -68,66 +72,53 @@ public class GameLogic {
         return false;
     }
 
-    public static List<String> readCityFile() {
-        List<String> cityList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(ABSOLUTE_PARTF))) {
-            String line = reader.readLine();
-            while (line != null) {
-                String[] cities = line.split(",");
-                for (String city : cities) {
-                    String trimmedCity = city.trim();
-                    if (!trimmedCity.isEmpty()) {
-                        cityList.add(trimmedCity);
-                    }
-                }
-                line = reader.readLine();
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return cityList;
-    }
-
-
-    public List<String> cities() {
-        List<String> citiesList = new ArrayList<>();
-        citiesList.add("Київ");
-        citiesList.add("Харків");
-        citiesList.add("Суми");
-        citiesList.add("Одеса");
-        citiesList.add("Дніпро");
-        citiesList.add("Донецьк");
-        citiesList.add("Запоріжжя");
-        citiesList.add("Вінниця");
-        citiesList.add("Алчевськ");
-        citiesList.add("Амвросіївка");
-        citiesList.add("Ананьїв");
-        citiesList.add("Красилів");
-        citiesList.add("Дубровиця");
-        citiesList.add("Єнакієве");
-        citiesList.add("Жданівка");
-        citiesList.add("Заводське");
-        citiesList.add("Зборів");
-        citiesList.add("Зіньків");
-        citiesList.add("Ялта");
-        citiesList.add("Краків");
-        citiesList.add("Катовіце");
-        citiesList.add("Вроцлав");
-        citiesList.add("Вугледар");
-
-
-        return citiesList;
-    }
 
     public void clearCollections() {
         citiesList.clear();
         usedCities.clear();
-
         usedCities.clear();
     }
 
+
+    public static List<String> downloadCityList() {
+        List<String> cityList = new ArrayList<>();
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+
+            HttpGet httpGet = new HttpGet("https://spravka109.net/ua/adres/ukraine/cities");
+            HttpResponse response = httpClient.execute(httpGet);
+
+            if (response.getStatusLine().getStatusCode() == 200) {
+
+                String content = EntityUtils.toString(response.getEntity(), "UTF-8");
+                Document document = Jsoup.parse(content);
+
+                Elements cityElements = document.select(".alist");
+                for (Element cityElement : cityElements) {
+                    String cityName = cityElement.text();
+
+
+                    if (cityName.length() >= 2) {
+
+                        cityName = cityName.split("\\(")[0].trim();
+
+                        cityName = cityName.replace("Воронеж-45", "").trim();
+                        cityName = cityName.replace(". р-н", "").trim();
+
+
+                        cityList.add(cityName);
+                    }
+                }
+            } else {
+                System.out.println("Failed to retrieve web page. Status code: " + response.getStatusLine().getStatusCode());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return cityList;
+    }
 }
 
 
