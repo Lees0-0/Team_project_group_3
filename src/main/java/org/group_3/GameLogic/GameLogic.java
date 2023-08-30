@@ -76,7 +76,7 @@ public class GameLogic {
     public void clearCollections() {
         citiesList.clear();
         usedCities.clear();
-        usedCities.clear();
+
     }
 
 
