@@ -102,7 +102,7 @@ public class GameLogic {
 
                         cityName = cityName.split("\\(")[0].trim();
 
-                        cityName = cityName.replace("Воронеж-45", "").trim();
+                        cityName = cityName.replace("Воронеж-45", "Вроцлав").trim();
                         cityName = cityName.replace(". р-н", "").trim();
 
 
