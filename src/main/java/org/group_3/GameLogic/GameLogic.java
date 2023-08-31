@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameLogic {
 
@@ -32,11 +33,20 @@ public class GameLogic {
         if (lastLetter == b) {
             lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 2));
         }
+
+        List<String> availableCities = new ArrayList<>();
         for (String city : citiesList) {
             if (city.toLowerCase().charAt(0) == lastLetter && !isCityUsed(city)) {
-                citiesList.remove(city);
-                return city;
+                availableCities.add(city);
             }
+        }
+
+        if (!availableCities.isEmpty()) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(availableCities.size());
+            String chosenCity = availableCities.get(randomIndex);
+            citiesList.remove(chosenCity);
+            return chosenCity;
         }
 
         return "здаюсь";
