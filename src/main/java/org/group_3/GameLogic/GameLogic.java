@@ -65,7 +65,7 @@ public class GameLogic {
         return true;
     }
 
-    //Перевірека на на писання назви міста за правильної літери
+    //Перевірека на на писання назви міста за правильної літери, якщо у комп'ютера остання літера "ь" берется попередня літера
     public boolean checkingFirstLastSymbol(String userInput) {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
