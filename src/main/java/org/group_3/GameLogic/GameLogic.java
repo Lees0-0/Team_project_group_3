@@ -20,16 +20,18 @@ public class GameLogic {
 
     // Створюємо додатковий список для збору відповідей.
     static List<String> usedCities = new ArrayList<>();
+    // Список міст
     private List<String> citiesList;
 
     public GameLogic() {
         citiesList = downloadCityList();
     }
 
-
+    //Рандомна генерація відповіді комп'ютера
     public String generateComputerResponse(String userInput) {
         char lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 1));
         char b = 'ь';
+        //Перевірка на м'який знак здвие на одну букву
         if (lastLetter == b) {
             lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 2));
         }
@@ -52,7 +54,7 @@ public class GameLogic {
         return "здаюсь";
     }
 
-
+    //Перевірка на правильність написання назви міста
     public boolean isValidCity(String city) {
         for (String citys : citiesList) {
             if (citys.equalsIgnoreCase(city)) {
@@ -63,6 +65,7 @@ public class GameLogic {
         return true;
     }
 
+    //Перевірека на на писання назви міста за правильної літери
     public boolean checkingFirstLastSymbol(String userInput) {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
@@ -73,6 +76,7 @@ public class GameLogic {
         return false;
     }
 
+    //Перевірка на використане місто
     public static boolean isCityUsed(String city) {
         for (String citys : usedCities) {
             if (citys.equalsIgnoreCase(city)) {
@@ -82,14 +86,14 @@ public class GameLogic {
         return false;
     }
 
-
+    //Чистка списків для гри знову
     public void clearCollections() {
         citiesList.clear();
         usedCities.clear();
 
     }
 
-
+    //Звавантаження міст з сайту
     public static List<String> downloadCityList() {
         List<String> cityList = new ArrayList<>();
 
