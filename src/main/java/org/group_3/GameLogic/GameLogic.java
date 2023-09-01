@@ -96,7 +96,7 @@ public class GameLogic {
 
     }
 
-    //Звавантаження міст з сайту
+
 
 }
 

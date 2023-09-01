@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListCity {
+    //Звавантаження міст з сайту
     public static List<String> downloadCityList() {
         List<String> cityList = new ArrayList<>();
 
