@@ -1,22 +1,14 @@
 package org.group_3.GameLogic;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class GameLogic {
     private char b = 'ь';
+    private char c = 'и';
+
 
     // Створюємо додатковий список для збору відповідей.
     static List<String> usedCities = new ArrayList<>();
@@ -32,7 +24,7 @@ public class GameLogic {
         char lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 1));
 
         //Перевірка на м'який знак здвие на одну букву
-        if (lastLetter == b) {
+        if (lastLetter == b || lastLetter == c ) {
             lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 2));
         }
 
@@ -70,7 +62,7 @@ public class GameLogic {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
         char lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
-        if (lastLetter == b) {
+        if (lastLetter == b || lastLetter == c) {
             lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 2));
         }
         if (firstLetter != lastLetter) {
