@@ -2,6 +2,8 @@ package org.group_3.windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+
 import static org.group_3.windows.CreatePanel.gbc;
 
 public class HelloWindow {
@@ -22,7 +24,11 @@ public class HelloWindow {
 
         button.addActionListener(e -> {
             frame.dispose();
-            GameWindow.createGameWindow();
+            try {
+                GameWindow.createGameWindow();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         frame.getContentPane().add(panel);
         frame.setVisible(true);
