@@ -10,9 +10,14 @@ import static org.group_3.windows.CreatePanel.gbc;
 public class GameWindow {
 
     private static int score = 0;
+    public static void resetScore() {
+        score = 0;
+    }
     public static void createGameWindow() throws IOException {
 
         GameLogic gameLogic = new GameLogic();
+
+        resetScore();
 
         JFrame frame = CreateWindow.createWindow("Міста");
         Icon.iconURL(frame);
@@ -71,12 +76,14 @@ public class GameWindow {
                 return;
             }
             if (computerResponse.equals("здаюсь")) {
+                score++;
                 frame.dispose();
                 ScoreWindow.createScoreWindow();
                 gameLogic.clearCollections();
                 ScoreWindow.getLabel().setText("Вітаємо з перемогою!");
-                ScoreWindow.getLabel2().setText("Рахуноко користувача:" + score++);
-                ScoreWindow.getLabel3().setText("Рахунок комп'ютера:" + score--);
+                ScoreWindow.getLabel2().setText("Рахунок користувача:" + score);
+                score--;
+                ScoreWindow.getLabel3().setText("Рахунок комп'ютера:" + score);
             }
 
             if (userInput.equals("здаюсь")) {

@@ -12,10 +12,15 @@ import static org.group_3.windows.CreatePanel.gbc;
 public class EnglishGameWindow {
 
     private static int score = 0;
+    public static void resetScore() {
+        score = 0;
+    }
+
     public static void createEnglishGameWindow() throws IOException {
 
         EnglishGameLogic englishGameLogic = new EnglishGameLogic();
 
+        resetScore();
         JFrame frame = CreateWindow.createWindow("Cities");
 
         Icon.iconURL(frame);
@@ -74,6 +79,7 @@ public class EnglishGameWindow {
                 return;
             }
             if (computerResponse.equals("give up")) {
+                score++;
                 frame.dispose();
                 EnglishScoreWindow.createScoreWindow();
                 englishGameLogic.clearCollections();

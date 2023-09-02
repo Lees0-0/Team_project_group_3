@@ -26,7 +26,7 @@ public class CitiesLibrary {
             for (String cityName : cityElements.eachText()) {
                 if (cityName.length() >= 2) {
                     cityName = cityName.split("\\(")[0].trim();
-                    cityName = cityName.replace("Воронеж-45", "Вроцлав").trim();
+                    cityName = cityName.replace("Воронеж-45", "здаюсь").trim();
                     cityName = cityName.replace(". р-н", "").trim();
                     cityList.add(cityName);
                 }
