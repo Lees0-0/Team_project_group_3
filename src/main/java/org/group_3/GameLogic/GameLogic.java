@@ -60,7 +60,7 @@ public class GameLogic {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
         char lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 1));
-        if (lastLetter == b || lastLetter == c) {
+        if (lastLetter == 'ь' || lastLetter == 'й' || lastLetter == 'ї' || lastLetter == 'и'  || lastLetter == 'ц') {
             lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 2));
         }
         if (firstLetter != lastLetter) {
