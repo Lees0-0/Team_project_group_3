@@ -6,30 +6,36 @@ import java.awt.*;
 import static org.group_3.windows.CreatePanel.gbc;
 
 public class ScoreWindow {
+
+    static JLabel label = new JLabel();
+
+    static JLabel label2 = new JLabel();
+
+    public static JLabel getLabel() {
+        return label;
+    }
+
+    public static JLabel getLabel2() {
+        return label2;
+    }
     public static void createScoreWindow() {
 
         JFrame frame = CreateWindow.createWindow("Рахунок гри");
         Icon.iconURL(frame);
         JPanel panel = CreatePanel.createPanel();
-
-        JLabel label = new JLabel("Рахунок гри: ");
-        panel.add(label);
-        gbc.gridy++;
-        JLabel test = new JLabel("test");
-        panel.add(test, gbc);
-        /*додати умову з виграшем програми та виграшем користувача
-        if(){
-            JLabel winLabel = new JLabel("Вітаємо з перемогою!");
-            panel.add(winLabel, gbc);
-        } else {
-            JLabel loseLabel = new JLabel("Не засмучуйтесь! Спробуйте ще раз!");
-            panel.add(loseLabel, gbc);
-        }*/
+        gbc.gridx++;
+        panel.add(label, gbc);
 
         gbc.gridy++;
+        gbc.gridy++;
+        panel.add(label2, gbc);
+
+        gbc.gridy++;
+        gbc.gridx++;
         JButton buttonStart = new JButton("Почати заново");
         panel.add(buttonStart, gbc);
-        gbc.gridx++;
+
+        gbc.gridx--;
         gbc.insets = new Insets(10, 10, 0, 0);
         JButton buttonEnd = new JButton("Кінець гри");
         panel.add(buttonEnd, gbc);
@@ -38,9 +44,7 @@ public class ScoreWindow {
             frame.dispose();
             HelloWindow.createHelloWindow();
         });
-        buttonEnd.addActionListener(e -> {
-            System.exit(0);
-        });
+        buttonEnd.addActionListener(e -> System.exit(0));
 
         frame.getContentPane().add(panel);
         frame.setVisible(true);
