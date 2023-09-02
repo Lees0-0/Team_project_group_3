@@ -15,7 +15,6 @@ public class GameWindow {
         GameLogic gameLogic = new GameLogic();
 
         JFrame frame = CreateWindow.createWindow("Міста");
-
         Icon.iconURL(frame);
         JPanel panel = CreatePanel.createPanel();
 
@@ -76,12 +75,17 @@ public class GameWindow {
                 ScoreWindow.createScoreWindow();
                 gameLogic.clearCollections();
                 ScoreWindow.getLabel().setText("Вітаємо з перемогою!");
-                ScoreWindow.getLabel2().setText("Рахунок гри:" + score);
+                ScoreWindow.getLabel2().setText("Рахуноко користувача:" + score++);
+                ScoreWindow.getLabel3().setText("Рахунок комп'ютера:" + score--);
             }
 
             if (userInput.equals("здаюсь")) {
                 frame.dispose();
                 ScoreWindow.createScoreWindow();
+                gameLogic.clearCollections();
+                ScoreWindow.getLabel().setText("Не засмучуйтесь! Спробуйте ще раз!");
+                ScoreWindow.getLabel2().setText("Рахунок користувача:" + score);
+                ScoreWindow.getLabel3().setText("Рахунок комп'ютера:" + score);
             } else {
                 score++;
                 textField.setText("");
@@ -100,7 +104,8 @@ public class GameWindow {
             ScoreWindow.createScoreWindow();
             gameLogic.clearCollections();
             ScoreWindow.getLabel().setText("Не засмучуйтесь! Спробуйте ще раз!");
-            ScoreWindow.getLabel2().setText("Рахунок гри:" + score);
+            ScoreWindow.getLabel2().setText("Рахунок користувача:" + score);
+            ScoreWindow.getLabel3().setText("Рахунок комп'ютера:" + score);
         });
     }
 }

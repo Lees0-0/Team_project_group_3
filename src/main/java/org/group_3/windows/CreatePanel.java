@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreatePanel {
-    static GridBagConstraints gbc = new GridBagConstraints();
+    public static GridBagConstraints gbc = new GridBagConstraints();
     public static JPanel createPanel(){
         JPanel panel = new JPanel(new GridBagLayout());
         gbc.gridx = 0;
