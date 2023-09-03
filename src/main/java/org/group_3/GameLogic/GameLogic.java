@@ -16,22 +16,22 @@ public class GameLogic {
 
     private final char g = 'ц';
 
-    // Створюємо додатковий список для збору відповідей.
     public static List<String> usedCities = new ArrayList<>();
-    // Список міст
+
     private final List<String> citiesList;
 
     public GameLogic() throws IOException{
         citiesList = CitiesLibrary.downloadCityList();
     }
 
-    //Рандомна генерація відповіді комп'ютера
     public String generateComputerResponse(String userInput) {
         char lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 1));
 
-        //Перевірка на м'який знак здвие на одну букву
         if (lastLetter == b || lastLetter == c || lastLetter == d || lastLetter == e || lastLetter == f || lastLetter == g) {
             lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 2));
+        }
+        if (userInput.toLowerCase().endsWith("ий")) {
+            lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 3));
         }
 
         List<String> availableCities = new ArrayList<>();
@@ -52,10 +52,10 @@ public class GameLogic {
         return "здаюсь";
     }
 
-    //Перевірка на правильність написання назви міста
+
     public boolean isValidCity(String city) {
-        for (String citys : citiesList) {
-            if (citys.equalsIgnoreCase(city)) {
+        for (String cities : citiesList) {
+            if (cities.equalsIgnoreCase(city)) {
                 return false;
             }
 
@@ -63,7 +63,6 @@ public class GameLogic {
         return true;
     }
 
-    //Перевірека на на писання назви міста за правильної літери, якщо у комп'ютера остання літера "ь" берется попередня літера
     public boolean checkingFirstLastSymbol(String userInput) {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
@@ -71,20 +70,22 @@ public class GameLogic {
         if (lastLetter == b || lastLetter == c || lastLetter == d || lastLetter == e || lastLetter == f || lastLetter == g) {
             lastLetter = Character.toLowerCase(lastAddedCity.charAt(lastAddedCity.length() - 2));
         }
+        if (lastAddedCity.toLowerCase().endsWith("ий")) {
+            lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 3));
+        }
         return firstLetter != lastLetter;
     }
 
-    //Перевірка на використане місто
+
     public static boolean isCityUsed(String city) {
-        for (String citys : usedCities) {
-            if (citys.equalsIgnoreCase(city)) {
+        for (String cities : usedCities) {
+            if (cities.equalsIgnoreCase(city)) {
                 return true;
             }
         }
         return false;
     }
 
-    //Чистка списків для гри знову
     public void clearCollections() {
         citiesList.clear();
         usedCities.clear();

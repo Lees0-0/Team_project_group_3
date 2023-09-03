@@ -14,14 +14,10 @@ public class EnglishGameLogic {
     private final char w = 'w';
     private final char x = 'x';
 
-
-    // Створюємо додатковий список для збору відповідей.
-
     public static List<String> usedCities = new ArrayList<>();
 
     String fileName = "./files/EnglishCitiesLibrary.txt";
 
-//    Список міст
     private final List<String> citiesList;
 
     private List<String> readCitiesFromFile() throws IOException {
@@ -39,11 +35,8 @@ public class EnglishGameLogic {
         citiesList = readCitiesFromFile();
     }
 
-    //Рандомна генерація відповіді комп'ютера
     public String generateComputerResponse(String userInput) {
         char lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 1));
-
-        //Перевірка на м'який знак здвие на одну букву
         if (lastLetter == q || lastLetter == w || lastLetter == x) {
             lastLetter = Character.toLowerCase(userInput.charAt(userInput.length() - 2));
         }
@@ -66,7 +59,6 @@ public class EnglishGameLogic {
         return "give up";
     }
 
-    //Перевірка на правильність написання назви міста
     public boolean isValidCity(String city) {
         for (String cities : citiesList) {
             if (cities.equalsIgnoreCase(city)) {
@@ -77,7 +69,6 @@ public class EnglishGameLogic {
         return true;
     }
 
-    //Перевірека на на писання назви міста за правильної літери, якщо у комп'ютера остання літера "ь" берется попередня літера
     public boolean checkingFirstLastSymbol(String userInput) {
         char firstLetter = Character.toLowerCase(userInput.charAt(0));
         String lastAddedCity = usedCities.get(usedCities.size() - 1);
@@ -88,7 +79,6 @@ public class EnglishGameLogic {
         return firstLetter != lastLetter;
     }
 
-    //Перевірка на використане місто
     public static boolean isCityUsed(String city) {
         for (String cities : usedCities) {
             if (cities.equalsIgnoreCase(city)) {
@@ -98,7 +88,6 @@ public class EnglishGameLogic {
         return false;
     }
 
-    //Чистка списків для гри знову
     public void clearCollections() {
         citiesList.clear();
         usedCities.clear();
