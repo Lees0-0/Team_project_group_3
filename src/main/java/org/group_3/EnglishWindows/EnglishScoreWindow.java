@@ -4,6 +4,10 @@ import org.group_3.windows.CreatePanel;
 import org.group_3.windows.CreateWindow;
 import org.group_3.windows.HelloWindow;
 import org.group_3.windows.Icon;
+import static org.group_3.windows.CreatePanel.TOP_INSET;
+import static org.group_3.windows.CreatePanel.LEFT_INSET;
+import static org.group_3.windows.CreatePanel.RIGHT_INSET;
+import static org.group_3.windows.CreatePanel.BOTTOM_INSET;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +45,7 @@ public class EnglishScoreWindow {
         panel.add(buttonStart, gbc);
 
         gbc.gridx--;
-        gbc.insets = new Insets(10, 10, 0, 0);
+        gbc.insets = new Insets(TOP_INSET, LEFT_INSET, BOTTOM_INSET, RIGHT_INSET);
         JButton buttonEnd = new JButton("End of the game");
         panel.add(buttonEnd, gbc);
 
