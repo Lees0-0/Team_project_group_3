@@ -4,14 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 
 import static org.group_3.windows.CreatePanel.gbc;
+import static org.group_3.windows.CreatePanel.TOP_INSET;
+import static org.group_3.windows.CreatePanel.LEFT_INSET;
+import static org.group_3.windows.CreatePanel.RIGHT_INSET;
+import static org.group_3.windows.CreatePanel.BOTTOM_INSET;
+
+
 
 public class ScoreWindow {
 
     static JLabel label = new JLabel();
 
     static JLabel label2 = new JLabel();
-
-
 
     static JLabel label3 = new JLabel();
 
@@ -45,7 +49,7 @@ public class ScoreWindow {
         panel.add(buttonStart, gbc);
 
         gbc.gridx--;
-        gbc.insets = new Insets(10, 10, 0, 0);
+        gbc.insets = new Insets(TOP_INSET, LEFT_INSET, BOTTOM_INSET, RIGHT_INSET);
         JButton buttonEnd = new JButton("Кінець гри");
         panel.add(buttonEnd, gbc);
 

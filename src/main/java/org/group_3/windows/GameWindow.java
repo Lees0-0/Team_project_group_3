@@ -9,6 +9,8 @@ import static org.group_3.windows.CreatePanel.gbc;
 
 public class GameWindow {
 
+    public static final int TEXT_FIELD_SIZE = 10;
+
     private static int score = 0;
     public static void resetScore() {
         score = 0;
@@ -23,7 +25,7 @@ public class GameWindow {
         Icon.iconURL(frame);
         JPanel panel = CreatePanel.createPanel();
 
-        JTextField textField = new JTextField(10);
+        JTextField textField = new JTextField(TEXT_FIELD_SIZE);
         panel.add(textField, gbc);
 
         gbc.gridx++;
